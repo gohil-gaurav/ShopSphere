@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}{{ product.name }} - ShopSphere{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-5">
+        {% if product.image %}
+            <img src="{{ product.image.url }}" class="img-fluid rounded" alt="{{ product.name }}">
+        {% else %}
+            <div class="border rounded bg-light d-flex align-items-center justify-content-center" style="height: 280px;">
+                <span class="text-muted">No image</span>
+            </div>
+        {% endif %}
+    </div>
+    <div class="col-md-7">
+        <h1 class="h3">{{ product.name }}</h1>
+        <p class="text-muted">{{ product.category.name }}</p>
+        <p class="fs-4 fw-semibold">${{ product.price }}</p>
+        <p>{{ product.description|default:"No description yet." }}</p>
+        <p class="text-muted small">SKU: {{ product.sku }}</p>
+        <div class="mt-4">
+            <a href="{% url 'products:list' %}" class="btn btn-outline-secondary">Back to products</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
