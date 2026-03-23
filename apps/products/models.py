@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
@@ -21,6 +22,14 @@ class Category(models.Model):
 
 
 class Product(models.Model):
+	# Seller is nullable for existing products; will be enforced later via data cleanup.
+	seller = models.ForeignKey(
+		settings.AUTH_USER_MODEL,
+		related_name="products",
+		on_delete=models.CASCADE,
+		null=True,
+		blank=True,
+	)
 	category = models.ForeignKey(Category, related_name="products", on_delete=models.PROTECT)
 	name = models.CharField(max_length=200)
 	slug = models.SlugField(max_length=220, unique=True)

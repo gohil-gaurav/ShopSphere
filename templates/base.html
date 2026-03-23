@@ -27,6 +27,9 @@
                 <li class="nav-item"><a class="nav-link" href="{% url 'cart:detail' %}">Cart <span class="badge rounded-pill text-bg-light">{{ cart|length }}</span></a></li>
                 {% if user.is_authenticated %}
                     <li class="nav-item"><a class="nav-link" href="{% url 'orders:history' %}">Orders</a></li>
+                    {% if user.is_seller %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'sellers:dashboard' %}">Seller</a></li>
+                    {% endif %}
                     <li class="nav-item"><a class="nav-link" href="{% url 'accounts:profile' %}">Profile</a></li>
                     <li class="nav-item">
                         <form method="post" action="{% url 'accounts:logout' %}" class="d-inline">

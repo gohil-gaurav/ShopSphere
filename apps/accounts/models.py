@@ -32,6 +32,9 @@ class User(AbstractBaseUser, PermissionsMixin):
 	first_name = models.CharField(max_length=150)
 	last_name = models.CharField(max_length=150)
 	phone_number = models.CharField(max_length=20, blank=True)
+	# Role flags for marketplace users
+	is_seller = models.BooleanField(default=False)
+	is_customer = models.BooleanField(default=True)
 	is_active = models.BooleanField(default=True)
 	is_staff = models.BooleanField(default=False)
 	date_joined = models.DateTimeField(default=timezone.now)

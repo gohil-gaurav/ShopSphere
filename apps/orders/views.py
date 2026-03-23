@@ -42,6 +42,7 @@ class CheckoutView(LoginRequiredMixin, FormView):
 				OrderItem.objects.create(
 					order=order,
 					product=item["product"],
+					seller=item["product"].seller,
 					price=item["price"],
 					quantity=item["quantity"],
 				)
