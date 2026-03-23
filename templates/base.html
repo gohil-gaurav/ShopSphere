@@ -28,7 +28,12 @@
                 {% if user.is_authenticated %}
                     <li class="nav-item"><a class="nav-link" href="{% url 'orders:history' %}">Orders</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'accounts:profile' %}">Profile</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'accounts:logout' %}">Logout</a></li>
+                    <li class="nav-item">
+                        <form method="post" action="{% url 'accounts:logout' %}" class="d-inline">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-link nav-link p-0">Logout</button>
+                        </form>
+                    </li>
                 {% else %}
                     <li class="nav-item"><a class="nav-link" href="{% url 'accounts:login' %}">Login</a></li>
                     <li class="nav-item"><a class="btn btn-brand" href="{% url 'accounts:signup' %}">Sign up</a></li>
