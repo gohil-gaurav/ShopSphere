@@ -28,7 +28,7 @@
                                 <strong>{{ item.product.name }}</strong>
                                 <div class="text-muted small">SKU: {{ item.product.sku }}</div>
                             </td>
-                            <td>${{ item.price }}</td>
+                            <td>Rs. {{ item.price }}</td>
                             <td>
                                 <form action="{% url 'cart:add' item.product.id %}" method="post" class="d-flex gap-2">
                                     {% csrf_token %}
@@ -37,7 +37,7 @@
                                     <button class="btn btn-sm btn-outline-dark" type="submit">Update</button>
                                 </form>
                             </td>
-                            <td>${{ item.total_price }}</td>
+                            <td>Rs. {{ item.total_price }}</td>
                             <td>
                                 <a class="btn btn-sm btn-outline-danger" href="{% url 'cart:remove' item.product.id %}">Remove</a>
                             </td>
@@ -48,7 +48,7 @@
         </div>
 
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-2">
-            <h2 class="h5 mb-0">Total: ${{ cart.get_total_price }}</h2>
+            <h2 class="h5 mb-0">Total: Rs. {{ cart.get_total_price }}</h2>
             <div class="d-flex gap-2">
                 <a href="{% url 'products:list' %}" class="btn btn-outline-dark">Continue shopping</a>
                 {% if user.is_authenticated %}

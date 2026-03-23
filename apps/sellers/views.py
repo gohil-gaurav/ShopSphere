@@ -1,4 +1,4 @@
-from django.db.models import Count
+from django.db.models import Count, Q
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, ListView, TemplateView, UpdateView
 
@@ -16,11 +16,16 @@ class SellerDashboardView(SellerRequiredMixin, TemplateView):
 		context = super().get_context_data(**kwargs)
 		seller = self.request.user
 		context["product_count"] = Product.objects.filter(seller=seller).count()
-		context["order_count"] = OrderItem.objects.filter(product__seller=seller).values("order_id").distinct().count()
+		context["order_count"] = (
+			OrderItem.objects.filter(Q(seller=seller) | Q(product__seller=seller))
+			.values("order_id")
+			.distinct()
+			.count()
+		)
 		context["top_products"] = (
 			Product.objects.filter(seller=seller)
-			.annotate(order_items=Count("order_items"))
-			.order_by("-order_items")[:5]
+			.annotate(order_item_count=Count("order_items"))
+			.order_by("-order_item_count")[:5]
 		)
 		return context
 
@@ -69,7 +74,7 @@ class SellerOrdersView(SellerRequiredMixin, ListView):
 
 	def get_queryset(self):
 		return (
-			OrderItem.objects.filter(product__seller=self.request.user)
+			OrderItem.objects.filter(Q(seller=self.request.user) | Q(product__seller=self.request.user))
 			.select_related("order", "product")
 			.order_by("-order__created_at")
 		)

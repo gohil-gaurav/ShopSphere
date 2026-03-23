@@ -23,7 +23,7 @@
                         <tr>
                             <td>#{{ order.id }}</td>
                             <td>{{ order.get_status_display }}</td>
-                            <td>${{ order.total_amount }}</td>
+                            <td>Rs. {{ order.total_amount }}</td>
                             <td>{{ order.created_at|date:"M d, Y" }}</td>
                             <td><a class="btn btn-sm btn-outline-dark" href="{% url 'orders:detail' order.id %}">View</a></td>
                         </tr>

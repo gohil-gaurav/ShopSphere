@@ -19,7 +19,7 @@
         <div class="section-card">
             <span class="badge-soft">{{ product.category.name }}</span>
             <h1 class="h3 mt-3">{{ product.name }}</h1>
-            <p class="fs-4 fw-semibold">${{ product.price }}</p>
+            <p class="fs-4 fw-semibold">Rs. {{ product.price }}</p>
             <p class="text-muted">{{ product.description|default:"No description yet." }}</p>
             <p class="text-muted small">SKU: {{ product.sku }}</p>
             {% if product.stock > 0 %}

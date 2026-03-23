@@ -15,7 +15,7 @@
                     {% for item in order.items.all %}
                         <li class="d-flex justify-content-between">
                             <span>{{ item.product.name }} x {{ item.quantity }}</span>
-                            <span>${{ item.get_total_price }}</span>
+                            <span>Rs. {{ item.get_total_price }}</span>
                         </li>
                     {% endfor %}
                 </ul>
@@ -33,7 +33,7 @@
                 <p class="mb-1">{{ order.address.country }}</p>
                 <p class="mb-0">{{ order.address.phone_number }}</p>
                 <hr>
-                <p class="fw-semibold mb-0">Total: ${{ order.total_amount }}</p>
+                <p class="fw-semibold mb-0">Total: Rs. {{ order.total_amount }}</p>
             </div>
         </div>
     </div>

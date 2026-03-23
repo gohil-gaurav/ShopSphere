@@ -25,7 +25,7 @@
                             <td>#{{ item.order.id }}</td>
                             <td>{{ item.product.name }}</td>
                             <td>{{ item.quantity }}</td>
-                            <td>${{ item.get_total_price }}</td>
+                            <td>Rs. {{ item.get_total_price }}</td>
                             <td>{{ item.order.get_status_display }}</td>
                             <td>{{ item.order.created_at|date:"M d, Y" }}</td>
                         </tr>
